@@ -1,0 +1,17 @@
+{
+  "Name": "(CP) RSV Summit Cellar",
+  "Author": "LyzzCL",
+  "Version": "1.0.0",
+  "Description": "Adds a cellar to the Ridgeside Village Summit House",
+  "UniqueID": "LyzzCL.RSVSummitCellar",
+  "UpdateKeys": ["Nexus:26779"],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Rafseazz.RidgesideVillage",
+      "IsRequired": true
+    }
+  ]
+}

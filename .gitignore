@@ -1,0 +1,8 @@
+# Ignore tilesheets for development purposes
+*.png
+
+# Ignore config so it creates the default config on launch
+config.json
+
+# Dev Stuff
+./assets/Maps/MovePngHereBeforeOpeningGame

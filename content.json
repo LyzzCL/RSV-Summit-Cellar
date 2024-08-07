@@ -1,0 +1,199 @@
+{
+  "Format": "2.3.0",
+
+  "ConfigSchema": {
+    "Stairs Location": {
+      "AllowValues": "NextDoorRight, NextDoorLeft, LowerRight",
+      "Default": "NextDoorRight",
+      "Description": "NextDoorRight/Left places cellar stairs next to the entrance, LowerRight below the entrance.",
+      "Section": "House Changes"
+    },
+    "Remove House Columns": {
+      "AllowValues": "true, false",
+      "Default": "false",
+      "Section": "House Changes"
+    },
+    "Remove Cellar Columns": {
+      "AllowValues": "true, false",
+      "Default": "false",
+      "Section": "Cellar Changes"
+    },
+
+    "2 Floors": {
+      "AllowValues": "true, false",
+      "Default": "false",
+      "Description": "Adds an extra floor to place more casks!",
+      "Section": "Cellar Changes"
+    },
+
+    "Tunnel": {
+      "AllowValues": "true, false",
+      "Default": "false",
+      "Description": "Adds a tunnel to make traveling between cellars faster. (Compatibility only tested with vanilla cellar).",
+      "Section": "Cellar Changes"
+    }
+  },
+
+  "CustomLocations": [
+    {
+      "Name": "Custom_RSVSummitCellar1",
+      "FromMapFile": "assets/Maps/Cellar1.tmx"
+    },
+    {
+      "Name": "Custom_RSVSummitCellar2",
+      "FromMapFile": "assets/Maps/Cellar2.tmx"
+    },
+    {
+      "Name": "Custom_RSVSummitCellarTunnel",
+      "FromMapFile": "assets/Maps/Tunnel.tmx"
+    }
+  ],
+
+  "Changes": [
+    //* Cellar warp points depending on stairs location
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "AddWarps": ["27 1 Custom_Ridgeside_RSVSummitHouseNew 19 13", "28 1 Custom_Ridgeside_RSVSummitHouseNew 20 13"],
+      "When": { "Stairs Location": "NextDoorRight" }
+    },
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "AddWarps": ["27 1 Custom_Ridgeside_RSVSummitHouseNew 12 13", "28 1 Custom_Ridgeside_RSVSummitHouseNew 13 13"],
+      "When": { "Stairs Location": "NextDoorLeft" }
+    },
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "AddWarps": ["27 1 Custom_Ridgeside_RSVSummitHouseNew 13 13", "28 1 Custom_Ridgeside_RSVSummitHouseNew 13 14"],
+      "When": { "Stairs Location": "LowerRight" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar2",
+      "AddWarps": ["3 1 Custom_RSVSummitCellar1 1 15", "4 1 Custom_RSVSummitCellar1 1 15"]
+    },
+
+    //* House stairs locations
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_Ridgeside_RSVSummitHouseNew",
+      "FromFile": "assets/Maps/House_CellarStairsNDR.tmx",
+      "ToArea": { "X": 18, "Y": 11, "Width": 4, "Height": 4 },
+      "AddWarps": ["19 14 Custom_RSVSummitCellar1 27 2", "20 14 Custom_RSVSummitCellar1 28 2"],
+      "When": { "Stairs Location": "NextDoorRight" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_Ridgeside_RSVSummitHouseNew",
+      "FromFile": "assets/Maps/House_CellarStairsNDL.tmx",
+      "ToArea": { "X": 11, "Y": 11, "Width": 4, "Height": 4 },
+      "AddWarps": ["12 14 Custom_RSVSummitCellar1 27 2", "13 14 Custom_RSVSummitCellar1 28 2"],
+      "When": { "Stairs Location": "NextDoorLeft" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_Ridgeside_RSVSummitHouseNew",
+      "FromFile": "assets/Maps/House_CellarStairsLR.tmx",
+      "ToArea": { "X": 10, "Y": 12, "Width": 4, "Height": 3 },
+      "AddWarps": ["13 13 Custom_RSVSummitCellar1 27 2", "13 14 Custom_RSVSummitCellar1 28 2"],
+      "When": { "Stairs Location": "LowerRight" }
+    },
+
+    //* Remove columns
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_Ridgeside_RSVSummitHouseNew",
+      "FromFile": "assets/Maps/Remove_HouseColumns.tmx",
+      "ToArea": { "X": 7, "Y": 0, "Width": 4, "Height": 5 },
+      "When": { "Remove House Columns": "true" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "FromFile": "assets/Maps/Remove_CellarColumns1.tmx",
+      "ToArea": { "X": 7, "Y": 2, "Width": 18, "Height": 5 },
+      "When": { "Remove Cellar Columns": "true" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar2",
+      "FromFile": "assets/Maps/Remove_CellarColumns2.tmx",
+      "ToArea": { "X": 7, "Y": 2, "Width": 18, "Height": 5 },
+      "When": { "Remove Cellar Columns": "true" }
+    },
+
+    //* 1 Floor & Tunnel
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "FromFile": "assets/Maps/Cellar1_Stairs.tmx",
+      "ToArea": { "X": 0, "Y": 14, "Width": 4, "Height": 2 },
+      "AddWarps": ["1 16 Custom_RSVSummitCellarTunnel 3 2", "2 16 Custom_RSVSummitCellarTunnel 4 2"],
+      "When": { "2 Floors": "false", "Tunnel": "true" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellarTunnel",
+      "AddWarps": [
+        "3 1 Custom_RSVSummitCellar1 1 15",
+        "4 1 Custom_RSVSummitCellar1 2 15",
+        "31 9 Cellar 13 1",
+        "32 9 Cellar 14 1"
+      ],
+      "When": { "2 Floors": "false" }
+    },
+
+    //* 2 Floor & Tunnel
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar1",
+      "FromFile": "assets/Maps/Cellar1_Stairs.tmx",
+      "ToArea": { "X": 0, "Y": 14, "Width": 4, "Height": 2 },
+      "AddWarps": ["1 16 Custom_RSVSummitCellar2 3 2", "2 16 Custom_RSVSummitCellar2 4 2"],
+      "When": { "2 Floors": "true" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellar2",
+      "FromFile": "assets/Maps/Cellar2_Stairs.tmx",
+      "ToArea": { "X": 28, "Y": 14, "Width": 4, "Height": 2 },
+      "AddWarps": [
+        "3 1 Custom_RSVSummitCellar1 1 15",
+        "4 1 Custom_RSVSummitCellar1 1 15",
+        "29 16 Custom_RSVSummitCellarTunnel 3 2",
+        "30 16 Custom_RSVSummitCellarTunnel 4 2"
+      ],
+      "When": { "Tunnel": "true" }
+    },
+
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Custom_RSVSummitCellarTunnel",
+      "AddWarps": [
+        "3 1 Custom_RSVSummitCellar2 29 15",
+        "4 1 Custom_RSVSummitCellar2 30 15",
+        "31 9 Cellar 13 1",
+        "32 9 Cellar 14 1"
+      ],
+      "When": { "2 Floors": "true" }
+    },
+
+    //* Edits farmhouse maps
+    {
+      "Action": "EditMap",
+      "Target": "Maps/Cellar",
+      "FromFile": "assets/Maps/FarmhouseCellar_Stairs.tmx",
+      "ToArea": { "X": 12, "Y": 0, "Width": 4, "Height": 7 },
+      "When": { "Tunnel": "true", "HasFlag: hostPlayer": "RSV.SummitHouseRedone" }
+    }
+  ]
+}
